@@ -1,0 +1,1 @@
+sudo find /opt /usr/local /home /usr -type f \( -name voltdb -o -name sqlcmd -o -name voltadmin \) 2>/dev/null
