@@ -10,6 +10,8 @@ VoltDB działa najpewniej w kontenerze Docker, dlatego polecenia VoltDB trzeba w
 
 export LICENSE_FILE_PATH=/home/ubuntu/license.xml
 
+docker cp test_voltdb_day1.sh voltdb:/tmp/test_voltdb_day1.sh
+
 ------------------------------------------------------------
 1. Sprawdzenie, czy kontenery działają
 ------------------------------------------------------------
