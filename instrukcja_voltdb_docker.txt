@@ -8,6 +8,8 @@ Skrypt uruchomił się poprawnie, ale zatrzymał się na komunikacie:
 To oznacza, że w systemie Ubuntu nie ma dostępnej komendy voltdb.
 VoltDB działa najpewniej w kontenerze Docker, dlatego polecenia VoltDB trzeba wykonywać wewnątrz kontenera.
 
+export LICENSE_FILE_PATH=/home/ubuntu/license.xml
+
 ------------------------------------------------------------
 1. Sprawdzenie, czy kontenery działają
 ------------------------------------------------------------
