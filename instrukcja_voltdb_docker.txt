@@ -1,0 +1,135 @@
+INSTRUKCJA: uruchamianie testu VoltDB, gdy VoltDB działa w Dockerze
+
+Sytuacja:
+Skrypt uruchomił się poprawnie, ale zatrzymał się na komunikacie:
+
+[ERR] Brakuje polecenia: voltdb
+
+To oznacza, że w systemie Ubuntu nie ma dostępnej komendy voltdb.
+VoltDB działa najpewniej w kontenerze Docker, dlatego polecenia VoltDB trzeba wykonywać wewnątrz kontenera.
+
+------------------------------------------------------------
+1. Sprawdzenie, czy kontenery działają
+------------------------------------------------------------
+
+W katalogu, gdzie znajduje się plik docker-compose.yaml, wpisz:
+
+docker compose ps
+
+Sprawdź, czy kontener voltdb ma status running albo healthy.
+
+------------------------------------------------------------
+2. Wejście do kontenera VoltDB
+------------------------------------------------------------
+
+Wpisz:
+
+docker exec -it voltdb bash
+
+Jeżeli komenda nie zadziała, sprawdź dokładną nazwę kontenera:
+
+docker ps
+
+Następnie użyj nazwy kontenera z listy, np.:
+
+docker exec -it NAZWA_KONTENERA bash
+
+------------------------------------------------------------
+3. Sprawdzenie komend VoltDB wewnątrz kontenera
+------------------------------------------------------------
+
+Po wejściu do kontenera wpisz:
+
+which voltdb
+which sqlcmd
+
+Jeśli pojawią się ścieżki do tych programów, wszystko jest dobrze.
+
+------------------------------------------------------------
+4. Sprawdzenie połączenia SQL z VoltDB
+------------------------------------------------------------
+
+W kontenerze wpisz:
+
+sqlcmd --servers=localhost
+
+Jeżeli otworzy się konsola SQL, wpisz:
+
+show tables;
+
+Aby wyjść z konsoli SQL:
+
+exit;
+
+Aby wyjść z kontenera:
+
+exit
+
+------------------------------------------------------------
+5. Uruchomienie skryptu .sh wewnątrz kontenera VoltDB
+------------------------------------------------------------
+
+Najpierw upewnij się, że jesteś w katalogu, gdzie masz swój skrypt .sh.
+
+Sprawdź:
+
+ls *.sh
+
+Skopiuj skrypt do kontenera:
+
+docker cp *.sh voltdb:/tmp/
+
+Wejdź do kontenera:
+
+docker exec -it voltdb bash
+
+W kontenerze wpisz:
+
+cd /tmp
+chmod +x *.sh
+ls *.sh
+
+Uruchom skrypt:
+
+./nazwa_skryptu.sh
+
+Przykład:
+
+./voltdb_day1_test.sh
+
+------------------------------------------------------------
+6. Gdyby skrypt miał problem z końcami linii z Windowsa
+------------------------------------------------------------
+
+W kontenerze albo w Ubuntu wpisz:
+
+sed -i 's/\r$//' *.sh
+chmod +x *.sh
+
+Potem ponownie uruchom:
+
+./nazwa_skryptu.sh
+
+------------------------------------------------------------
+7. Najkrótsza wersja komend
+------------------------------------------------------------
+
+docker compose ps
+docker cp *.sh voltdb:/tmp/
+docker exec -it voltdb bash
+
+A potem już w kontenerze:
+
+cd /tmp
+sed -i 's/\r$//' *.sh
+chmod +x *.sh
+ls *.sh
+./nazwa_skryptu.sh
+
+------------------------------------------------------------
+Wniosek
+------------------------------------------------------------
+
+Skrypt nie jest zepsuty.
+Problem polega na tym, że polecenie voltdb nie jest dostępne bezpośrednio w Ubuntu.
+VoltDB działa w Dockerze, więc testy VoltDB trzeba wykonywać w kontenerze voltdb.
