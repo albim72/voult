@@ -3,3 +3,57 @@ sudo find /opt /usr/local /home /usr -type f \( -name voltdb -o -name sqlcmd -o 
 
 chmod +x test_voltdb_day1.sh
 ./test_voltdb_day1.sh
+
+
+Najszybciej: **będąc w tym katalogu, w którym jesteś teraz**, wpisz:
+
+```bash
+mv ~/Downloads/*.sh .
+```
+
+Jeśli Ubuntu ma polską nazwę katalogu:
+
+```bash
+mv ~/Pobrane/*.sh .
+```
+
+Kropka na końcu oznacza: **przenieś tutaj, do obecnego katalogu**.
+
+Potem:
+
+```bash
+chmod +x *.sh
+ls *.sh
+```
+
+I uruchom:
+
+```bash
+./nazwa_skryptu.sh
+```
+
+Jeśli nie wiesz, czy plik jest w `Downloads` czy `Pobrane`, zrób tak:
+
+```bash
+find ~ -maxdepth 3 -name "*.sh"
+```
+
+Potem skopiuj ścieżkę, np. jeśli pokaże:
+
+```bash
+/home/ubuntu/Downloads/voltdb_day1_test.sh
+```
+
+to przenieś:
+
+```bash
+mv /home/ubuntu/Downloads/voltdb_day1_test.sh .
+chmod +x voltdb_day1_test.sh
+./voltdb_day1_test.sh
+```
+
+Najkrótsze zaklęcie dla Twojej sytuacji:
+
+```bash
+mv ~/Downloads/*.sh . && chmod +x *.sh && ls *.sh
+```
