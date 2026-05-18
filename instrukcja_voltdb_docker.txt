@@ -12,6 +12,17 @@ export LICENSE_FILE_PATH=/home/ubuntu/license.xml
 
 docker cp test_voltdb_day1.sh voltdb:/tmp/test_voltdb_day1.sh
 
+
+exit
+ls -l *.sh
+docker cp test_voltdb_day1.sh voltdb:/tmp/test_voltdb_day1.sh
+docker exec -it voltdb bash
+cd /tmp
+chmod +x test_voltdb_day1.sh
+./test_voltdb_day1.sh
+
+
+
 ------------------------------------------------------------
 1. Sprawdzenie, czy kontenery działają
 ------------------------------------------------------------
